@@ -43,8 +43,8 @@ export class DutyMetrics {
     await this.storage.updateEpochProcessing({ epoch, is_calculated: true });
   }
 
-  private async withPossibleHighReward(epoch: Epoch, possibleHighRewardValidators: string[]): Promise<void> {
-    await allSettled([
+  private async withPossibleHighReward(epoch: Epoch, possibleHighRewardValidators: string[]): Promise<any> {
+    return allSettled([
       this.attestationMetrics.calculate(epoch, possibleHighRewardValidators),
       this.proposeMetrics.calculate(epoch, possibleHighRewardValidators),
       this.syncMetrics.calculate(epoch, possibleHighRewardValidators),

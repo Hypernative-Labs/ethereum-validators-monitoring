@@ -30,7 +30,7 @@ export class SyncMetrics {
     this.processedEpoch = epoch;
     this.operators = this.registryService.getOperators();
 
-    await allSettled([
+    return allSettled([
       this.userAvgSyncPercent(),
       this.otherAvgSyncPercent(),
       this.operatorAvgSyncPercents(),
@@ -58,7 +58,7 @@ export class SyncMetrics {
 
   private async syncParticipation(possibleHighRewardValidators: string[]) {
     const chainAvgSyncPercent = await this.chainAvgSyncPercent();
-    await allSettled([
+    return allSettled([
       this.goodSyncParticipationLastEpoch(chainAvgSyncPercent),
       this.badSyncParticipationLastEpoch(chainAvgSyncPercent),
       this.badSyncParticipationLastNEpoch(chainAvgSyncPercent),
