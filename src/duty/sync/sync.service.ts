@@ -60,6 +60,7 @@ export class SyncService {
       });
     }
     this.summary.epoch(epoch).setMeta({ sync: { blocks_to_sync: epochBlocksBits.map((b) => b.block) } });
+    this.logger.log(`Finished processing sync committee participation info`);
   }
 
   public async getSyncCommitteeIndexedValidators(epoch: Epoch, stateId: StateId): Promise<SyncCommitteeValidator[]> {
