@@ -21,7 +21,7 @@ export class ProposeService {
   public async check(epoch: Epoch): Promise<void> {
     this.logger.log(`Start getting proposers duties info`);
     const proposersDutyInfo = await this.clClient.getCanonicalProposerDuties(epoch);
-    this.logger.log(`Processing proposers duties info`);
+    this.logger.log(`Processing proposers duties info: ${proposersDutyInfo} total`);
     for (const prop of proposersDutyInfo) {
       const index = Number(prop.validator_index);
       const slot = Number(prop.slot);
@@ -34,5 +34,6 @@ export class ProposeService {
         block_proposed: !!blockHeader,
       });
     }
+    this.logger.log(`Finished processing proposers duties info`);
   }
 }
