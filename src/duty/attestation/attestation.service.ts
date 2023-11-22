@@ -53,7 +53,7 @@ export class AttestationService {
     const { attestations } = await this.getProcessedAttestations();
     this.logger.log(`Getting attestation duties info`);
     const committees = await this.getAttestationCommittees(stateSlot);
-    this.logger.log(`Processing attestation duty info`);
+    this.logger.log(`Processing attestation duty info: ${attestations.length} total`);
     const maxBatchSize = 5;
     let index = 0;
     for (const attestation of attestations) {
@@ -70,6 +70,7 @@ export class AttestationService {
         await unblock();
       }
     }
+    this.logger.log(`Finished processing attestation duty info`);
   }
 
   protected async processAttestation(epoch: Epoch, attestation: SlotAttestation, committee: number[]) {
