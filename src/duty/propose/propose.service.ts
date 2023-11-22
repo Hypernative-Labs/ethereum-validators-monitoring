@@ -21,7 +21,7 @@ export class ProposeService {
   public async check(epoch: Epoch): Promise<void> {
     this.logger.log(`Start getting proposers duties info`);
     const proposersDutyInfo = await this.clClient.getCanonicalProposerDuties(epoch);
-    this.logger.log(`Processing proposers duties info: ${proposersDutyInfo} total`);
+    this.logger.log(`Processing proposers duties info: ${proposersDutyInfo.length} total`);
     for (const prop of proposersDutyInfo) {
       const index = Number(prop.validator_index);
       const slot = Number(prop.slot);
